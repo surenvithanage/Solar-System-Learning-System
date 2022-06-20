@@ -1,0 +1,150 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <h3 class="mb-0">User table <button (click)="create()" class="btn btn-primary f-right">Create User</button></h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Username</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Role</th>
+                                <th scope="col">Date of Birth</th>
+                                <th scope="col">Options</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of userList">
+                                <td>{{user.id}}</td>
+                                <td>{{user.username}}</td>
+                                <td>{{user.email}}</td>
+                                <td>{{user.address}}</td>
+                                <td>{{user.roleId === 1 ? 'Admin' : 'Student'}}</td>
+                                <td>{{user.dob}}</td>
+                                <td>
+                                    <a (click)="open(user)" class="btn btn-sm btn-icon-only text-dark">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a class="btn btn-sm btn-icon-only text-dark" (click)="delete(user)">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #createUser let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Create</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" role="form">
+            <div class="form-group">
+                <label class="form-control-label" for="input-username">Username</label>
+                <input type="text" id="input-username" [(ngModel)]="model.username" #username="ngModel" name="username"  class="form-control form-control-alternative"
+                    placeholder="Username" required>
+            </div>
+            <div *ngIf="username.invalid && (username.dirty || username.touched)" class="prelogin-alert alert alert-danger">
+                <div *ngIf="username.errors.required">
+                    Username is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="input-email">Email</label>
+                <input type="text" id="input-email" [(ngModel)]="model.email" #email="ngModel" name="email" class="form-control form-control-alternative"
+                    placeholder="Email" required>
+            </div>
+            <div *ngIf="email.invalid && (email.dirty || email.touched)" class="prelogin-alert alert alert-danger">
+                <div *ngIf="email.errors.required">
+                    Email is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="input-address">Address</label>
+                <input type="text" id="input-address" [(ngModel)]="model.address" #address="ngModel" name="address"  class="form-control form-control-alternative"
+                    placeholder="Address" required>
+            </div>
+            <div *ngIf="address.invalid && (address.dirty || address.touched)" class="prelogin-alert alert alert-danger">
+                <div *ngIf="address.errors.required">
+                    Address is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="input-dob">Date of Birth</label>
+                <input type="text" id="input-dob" [(ngModel)]="model.dob" name="dob" #dob="ngModel"  class="form-control form-control-alternative"
+                    placeholder="Date of Birth (dd/mm/yyyy)" required>
+            </div>
+            <div *ngIf="dob.invalid && (dob.dirty || dob.touched)" class="prelogin-alert alert alert-danger">
+                <div *ngIf="dob.errors.required">
+                    DOB is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="input-password">Password</label>
+                <input type="password" id="input-password" [(ngModel)]="model.password" #password="ngModel" name="password"  class="form-control form-control-alternative"
+                required>
+            </div>
+            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="prelogin-alert alert alert-danger">
+                <div *ngIf="password.errors.required">
+                    Password is required.
+                </div>
+            </div>
+            <button type="submit" [disabled]="f.form.pristine || f.form.invalid" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #updateUser let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Update</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label class="form-control-label" for="input-username">Username</label>
+                <input type="text" id="input-username" [(ngModel)]="updateModel.username" name="username" [disabled]="true" class="form-control form-control-alternative"
+                    placeholder="Username">
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="input-username">Email</label>
+                <input type="text" id="input-username" [(ngModel)]="updateModel.email" name="email" [disabled]="true"  class="form-control form-control-alternative"
+                    placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="input-username">Address</label>
+                <input type="text" id="input-username" [(ngModel)]="updateModel.address" name="address"  class="form-control form-control-alternative"
+                    placeholder="Address">
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="input-username">Date of Birth</label>
+                <input type="text" id="input-username" [(ngModel)]="updateModel.dob" name="dob"  class="form-control form-control-alternative"
+                    placeholder="Date of Birth (dd/mm/yyyy)">
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="input-username">Role</label>
+                <input type="text" id="input-username" name="roleId" [disabled]="true" class="form-control form-control-alternative"
+                    placeholder="Role" value="{{updateModel.roleId === 1 ? 'Admin': 'Student'}}">
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" (click)="onUpdate()" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+</ng-template>

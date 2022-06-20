@@ -1,0 +1,96 @@
+<div class="header bg-gradient-danger py-7 py-lg-8">
+</div>
+<!-- Page content -->
+<div class="container mt--8 pb-5">
+  <!-- Table -->
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-md-8">
+      <div class="card bg-secondary shadow border-0">
+        <div class="card-body px-lg-5 py-lg-5">
+          <div class="text-center text-muted mb-4">
+            <small>Sign up with credentials</small>
+          </div>
+          <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" role="form">
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                </div>
+                <input class="form-control" [(ngModel)]="model.username" #username="ngModel" placeholder="Username"
+                  name="username" type="text" required>
+              </div>
+              <div *ngIf="username.invalid && (username.dirty || username.touched)"
+                class="prelogin-alert alert alert-danger">
+                <div *ngIf="username.errors.required">
+                  Username is required.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-single-02"></i></span>
+                </div>
+                <input class="form-control" [(ngModel)]="model.address" #address="ngModel" placeholder="Address"
+                  name="address" type="text" required>
+              </div>
+              <div *ngIf="address.invalid && (address.dirty || address.touched)"
+                class="prelogin-alert alert alert-danger">
+                <div *ngIf="address.errors.required">
+                  Address is required.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
+                </div>
+                <input class="form-control" [(ngModel)]="model.dob" #dob="ngModel"
+                  placeholder="Date of Birth  (mm/dd/yyyy)" name="dob" type="text" required>
+              </div>
+              <div *ngIf="dob.invalid && (dob.dirty || dob.touched)" class="prelogin-alert alert alert-danger">
+                <div *ngIf="dob.errors.required">
+                  DOB is required.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                </div>
+                <input class="form-control" [(ngModel)]="model.email" #email="ngModel" placeholder="Email" name="email"
+                  type="email" required>
+              </div>
+              <div *ngIf="email.invalid && (email.dirty || email.touched)" class="prelogin-alert alert alert-danger">
+                <div *ngIf="email.errors.required">
+                  Email is required.
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group input-group-alternative">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                </div>
+                <input class="form-control" [(ngModel)]="model.password" #password="ngModel" name="password"
+                  placeholder="Password" type="password" required>
+              </div>
+              <div *ngIf="password.invalid && (password.dirty || password.touched)"
+                class="prelogin-alert alert alert-danger">
+                <div *ngIf="password.errors.required">
+                  Password is required.
+                </div>
+              </div>
+            </div>
+            <div class="text-center">
+              <button type="submit" [disabled]="f.form.pristine || f.form.invalid" class="btn btn-primary mt-4">Create
+                account</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

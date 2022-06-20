@@ -1,0 +1,64 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <h3 class="mb-0">Quiz Progress table</h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Marks</th>
+                                <th scope="col">Progress</th>
+                                <th scope="col">User Id</th>
+                                <th scope="col">User</th>
+                                <th scope="col">Quiz Id</th>
+                                <th scope="col">Quiz</th>
+                                <th scope="col">Options</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let progress of progressList; let i = index">
+                                <td *ngFor="let p of progress">{{p}}</td>
+                                <td>
+                                    <a (click)="open(progress)" class="btn btn-sm btn-icon-only text-dark">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a class="btn btn-sm btn-icon-only text-dark" (click)="delete(progress)">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #updateModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Update</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label class="form-control-label" for="input-marks">Marks</label>
+                <input type="text" id="input-marks" [(ngModel)]="updateModel.marks" name="marks" class="form-control form-control-alternative"
+                    placeholder="Marks">
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" (click)="onUpdate()" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+</ng-template>

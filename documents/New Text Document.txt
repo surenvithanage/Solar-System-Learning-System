@@ -1,0 +1,40 @@
+Functionalities
+--------------------------------
+
+Visitor
+---------
+Registration
+Solar System
+Astronomy Calculator
+FAQ
+Contact Us
+
+Member
+---------
+Login
+View Profile and Edit
+Take Quiz
+View Quiz Results
+Change Password
+
+
+Admin
+--------
+CRUD Topic
+CRUD Sub Topic
+CRUD User
+CRUD Quiz
+CRUD Faq
+
+
+
+
+Your API key for officalsurenanthony@gmail.com is:
+
+9sR5xleGEDakkH0uf5qYX7nbOzI5hZSehhKrP7qn
+You can start using this key to make web service requests. Simply pass your key in the URL when making a web request. Here's an example:
+
+https://api.nasa.gov/planetary/apod?api_key=9sR5xleGEDakkH0uf5qYX7nbOzI5hZSehhKrP7qn
+For additional support, please contact us. When contacting us, please tell us what API you're accessing and provide the following account details so we can quickly find you:
+
+

@@ -1,0 +1,99 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <h3 class="mb-0">Topic table <button (click)="create()" class="btn btn-primary f-right">Create Topic</button></h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Description</th>
+                                <th scope="col">Options</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of dataList">
+                                <td>{{data.id}}</td>
+                                <td>{{data.title}}</td>
+                                <td>{{data.description}}</td>
+                                <td>
+                                    <a (click)="open(data)" class="btn btn-sm btn-icon-only text-dark">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a class="btn btn-sm btn-icon-only text-dark" (click)="delete(data)">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #createModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Create</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" role="form">
+            <div class="form-group">
+                <label class="form-control-label" for="input-name">Title</label>
+                <input type="text" id="input-name" [(ngModel)]="model.title" #title="ngModel" name="title"  class="form-control form-control-alternative"
+                    placeholder="Title" required>
+            </div>
+            <div *ngIf="title.invalid && (title.dirty || title.touched)" class="prelogin-alert alert alert-danger">
+                <div *ngIf="title.errors.required">
+                    Name is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="input-name">Description</label>
+                <textarea type="text" id="input-name" [(ngModel)]="model.description" #description="ngModel" name="description"  class="form-control form-control-alternative"
+                    placeholder="Description" required></textarea>
+            </div>
+            <div *ngIf="description.invalid && (description.dirty || description.touched)" class="prelogin-alert alert alert-danger">
+                <div *ngIf="description.errors.required">
+                    Description is required.
+                </div>
+            </div>
+            <button type="submit" [disabled]="f.form.pristine || f.form.invalid" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #updateModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Update</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label class="form-control-label" for="input-name">Title</label>
+                <input type="text" id="input-name" [(ngModel)]="updateModel.title" name="title" class="form-control form-control-alternative"
+                    placeholder="Title">
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="input-name">Description</label>
+                <textarea type="text" id="input-name" [(ngModel)]="updateModel.description" name="description" class="form-control form-control-alternative"
+                    placeholder="Description"></textarea>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" (click)="onUpdate()" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    </div>
+</ng-template>
