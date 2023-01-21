@@ -1,0 +1,42 @@
+<div class="container">
+    <div class="row" style="margin-top: 50px;">
+        <div class="col-md-12">
+            <div class="section-title text-center wow zoomIn">
+                <h4>Contact Us</h4>
+                <span></span>
+                <p>We will get back to you as soon as possible.</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12" style="margin-bottom: 50px;">
+        <form role="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" id="contact-form" class="contact-form">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="name" [(ngModel)]="model.name" #name="ngModel" autocomplete="off" id="Name"
+                            placeholder="Name">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="email" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" autocomplete="off" id="email"
+                            placeholder="E-mail">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <textarea class="form-control textarea" [(ngModel)]="model.message" #message="ngModel" rows="3" name="Message" id="Message"
+                            placeholder="Message"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn main-btn pull-right">Send a message</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

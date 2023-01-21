@@ -1,0 +1,73 @@
+<div class="container">
+    <div class="row" style="margin-top: 50px; margin-bottom: 50px;">
+        <div class="col-md-4">
+            <h4 style="margin-bottom: 25px;">Topics</h4>
+            <div class="topics">
+                <ul>
+                    <li class="listing" *ngFor="let topic of topicList; let i = index;" [ngClass]="{'highlight': selectedIndex === i}" (click)="loadSubTopic(topic.id); setRow(i);">{{topic.title}} <br /> {{topic.description }} <br /><br /></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-4" *ngIf="subTopicList.length > 0">
+            <h4 style="margin-bottom: 25px;">Sub Topics</h4>
+            <div class="topics">
+                <ul>
+                    <li class="listing" (click)="setSubRow(i);" [ngClass]="{'subhighlight': selectedSubIndex === i}" *ngFor="let subtopic of subTopicList; let i = index;">{{subtopic.title}} <br /> {{subtopic.description }}
+                        <br /><br />
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 50px; margin-bottom: 50px;">
+        <h4>Quiz List</h4>
+        <div class="table">
+            <thead>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Options</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let quiz of quizList">
+                    <td>{{quiz.id}}</td>
+                    <td>{{quiz.title}}</td>
+                    <td>{{quiz.description}}</td>
+                    <td><button class="btn btn-primary" (click)="download(quiz)">Start Download Quiz</button></td>
+                </tr>
+            </tbody>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 50px; margin-bottom: 50px;">
+        <h4>Enrolled Quiz List</h4>
+        <div class="table">
+            <thead>
+                <th>ID</th>
+                <th>Quiz ID</th>
+                <th>Marks</th>
+                <th>Status</th>
+                <th>Upload</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let quiz of enrolledList">
+                    <td>{{quiz.id}}</td>
+                    <td>{{quiz.quizId}}</td>
+                    <td>{{quiz.marks === '0' ? '--' : quiz.marks}}</td>
+                    <td>
+                        <span>{{quiz.progress === 0 ? 'Not Submitted for Marking': ''}}</span>
+                        <span>{{quiz.progress === 1 ? 'Pending': ''}}</span>
+                        <span>{{quiz.progress === 2 ? 'Marked': ''}}</span>
+                    </td>
+                    <td *ngIf="quiz.progress === 0">
+                        <input type="file" (change)="handleUpload($event, quiz)"/> <button class="btn btn-info" (click)="upload()">Upload</button>
+                    </td>
+                    <td *ngIf="quiz.progress === 1"><span style="color: green; font-weight: bold;">COMPLETED</span></td>
+                    <td *ngIf="quiz.progress === 2"><span style="color: red; font-weight: bold;">PENDING</span></td>
+                </tr>
+            </tbody>
+        </div>
+    </div>
+</div>

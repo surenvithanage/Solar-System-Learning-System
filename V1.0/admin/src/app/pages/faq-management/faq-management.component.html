@@ -1,0 +1,103 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+
+</div>
+<!-- Page content -->
+<div class="container-fluid mt--7">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card shadow">
+                <div class="card-header border-0">
+                    <h3 class="mb-0">FAQ table <button (click)="create()" class="btn btn-primary f-right">Create
+                            FAQ</button></h3>
+                </div>
+                <div class="table-responsive">
+                    <table class="table align-items-center table-flush">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Id</th>
+                                <th scope="col">Question</th>
+                                <th scope="col">Answer</th>
+                                <th scope="col">Options</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let faq of faqList">
+                                <td>{{faq.id}}</td>
+                                <td>{{faq.question}}</td>
+                                <td>{{faq.answer}}</td>
+                                <td>
+                                    <a (click)="open(faq)" class="btn btn-sm btn-icon-only text-dark">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a class="btn btn-sm btn-icon-only text-dark" (click)="delete(faq)">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #createModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Create</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" role="form">
+            <div class="form-group">
+                <label class="form-control-label" for="input-name">Question</label>
+                <input type="text" id="input-name" [(ngModel)]="model.question" #question="ngModel" name="question"
+                    class="form-control form-control-alternative" placeholder="Name" required>
+            </div>
+            <div *ngIf="question.invalid && (question.dirty || question.touched)"
+                class="prelogin-alert alert alert-danger">
+                <div *ngIf="question.errors.required">
+                    Question is required.
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="input-name">Answer</label>
+                <input type="text" id="input-name" [(ngModel)]="model.answer" #answer="ngModel" name="answer"
+                    class="form-control form-control-alternative" placeholder="Name" required>
+            </div>
+            <div *ngIf="answer.invalid && (answer.dirty || answer.touched)" class="prelogin-alert alert alert-danger">
+                <div *ngIf="answer.errors.required">
+                    Answer is required.
+                </div>
+            </div>
+            <button type="submit" [disabled]="f.form.pristine || f.form.invalid" class="btn btn-outline-dark"
+                (click)="modal.close('Save click')">Save</button>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #updateModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Update</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label class="form-control-label" for="input-name">Question</label>
+                <input type="text" id="input-name" [(ngModel)]="updateModel.question" name="question"
+                    class="form-control form-control-alternative" placeholder="Question">
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" for="input-name">Answer</label>
+                <input type="text" id="input-name" [(ngModel)]="updateModel.answer" name="answer"
+                    class="form-control form-control-alternative" placeholder="Answer">
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" (click)="onUpdate()" class="btn btn-outline-dark"
+            (click)="modal.close('Save click')">Save</button>
+    </div>
+</ng-template>

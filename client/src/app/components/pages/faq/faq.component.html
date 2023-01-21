@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="section-title text-center wow zoomIn">
+                <h4>Frequently Asked Questions</h4>
+                <span></span>
+                <p>Our Frequently Asked Questions here.</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">				
+        <div class="col-md-12">
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default" *ngFor="let faq of faqList; let i = index">
+                    <div class="panel-heading" role="tab" id="headingOne{{i}}">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion{{i}}" href="#collapseOne{{i}}" aria-expanded="true" aria-controls="collapseOne{{i}}">
+                                {{faq.question}}
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne{{i}}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne{{i}}">
+                        <div class="panel-body">
+                            <p>{{faq.answer}}</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div><!--- END COL -->		
+    </div><!--- END ROW -->			
+</div>
